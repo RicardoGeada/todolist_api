@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-import datetime
+from datetime import datetime, date
 
 
 # Create your models here.
@@ -12,3 +12,8 @@ class Todo(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
+    
+    def time_passed(self):
+        today = date.today()
+        delta = today - self.created_at
+        return delta.days
